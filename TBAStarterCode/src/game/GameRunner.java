@@ -6,6 +6,8 @@ import people.Person;
 
 import java.util.Scanner;
 
+// by Edward Yaroslavsky
+
 public class GameRunner {
 
     public static void main (String[] args)
