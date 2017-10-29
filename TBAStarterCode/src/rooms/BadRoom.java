@@ -1,5 +1,5 @@
 package rooms;
-
+//
 public class BadRoom extends Room {
 
 	int powerLevel = 1;

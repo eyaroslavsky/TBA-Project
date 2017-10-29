@@ -1,6 +1,6 @@
 package rooms;
 
-
+//
 public abstract class Room {
 
     public boolean explored;

@@ -1,5 +1,5 @@
 package rooms;
-
+//
 public class PowerRoom extends Room {
 
 	int powerLevel = 10;
