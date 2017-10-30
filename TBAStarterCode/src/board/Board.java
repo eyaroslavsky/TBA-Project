@@ -15,7 +15,10 @@ public class Board {
     private Room[][] rooms;
     private int boardSize = 0;
     
-
+    /**
+     * Board constructor to create new instances of the board while at play
+     * @param boardSizeInt the integer of the dimensions of the board
+     */
     public Board(int boardSizeInt) {
 
     	this.boardSize = boardSizeInt;
@@ -23,6 +26,9 @@ public class Board {
        
     }
 
+    /**
+     * Prints out the board
+     */
     public void printBoard() {
     
         for(Room[] row : rooms) {
@@ -35,31 +41,59 @@ public class Board {
         }
     }
     
+    /**
+     * Gives out the 2D array of rooms to be used later on
+     * @return the 2D array of the rooms
+     */
     public Room[][] getRooms() {
         return rooms;
     }
 
-    
+    /**
+     * Gives the X position of the room from a random room index
+     * @param index the integer of the X value of a random room
+     * @return the integer of the position of the X value of the room
+     */
     private int getXfromRoomIndex(int index) {
     	return (int) index/boardSize;
     }
     
+    /**
+     * Gives the Y position of the room from a random room index
+     * @param index the integer of the Y value of a random room
+     * @return the integer of the position of the Y value of the room
+     */
     private int getYfromRoomIndex(int index) {
     	return index % boardSize;
     }
     
+    /**
+     * Creates a harmful room 
+     * @param randRoomIndex the integer of the index of where the room should be
+     * @param powerLevel the integer of the power the room holds
+     * @param roomLevel the integer of the risk the room holds
+     */
     private void createBadRoom(int randRoomIndex, int powerLevel, int roomLevel) {
 		BadRoom e = new BadRoom(powerLevel, roomLevel);    			
 		e.setIndex(randRoomIndex);			
 		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
     }
     
+    /**
+     * Creates a helpful room 
+     * @param randRoomIndex the integer of the index of where the room should be
+     * @param powerLevel the integer of the power the room holds
+     * @param roomLevel the integer of the risk the room holds
+     */
     private void createPowerRoom(int randRoomIndex, int powerLevel, int roomLevel) {
     	PowerRoom e = new PowerRoom(powerLevel, roomLevel);    			
 		e.setIndex(randRoomIndex);			
 		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
     }
     
+    /**
+     * Generates the rooms randomly
+     */
     public void generateRooms() {
     	
     	if (rooms == null)

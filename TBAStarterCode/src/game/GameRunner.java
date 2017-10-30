@@ -19,7 +19,9 @@ public class GameRunner {
     	System.exit(0);
     }
 	
-	
+	/**
+	 * Starts the game, creates the board size depending on user input, and continues the game
+	 */
 	private void runGame() {
 		
 		System.out.println("Welcome to my game. What size board do want to play on? S, M, L: ");
