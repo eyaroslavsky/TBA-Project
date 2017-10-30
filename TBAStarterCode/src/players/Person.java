@@ -1,5 +1,5 @@
 package players;
-//
+
 import java.util.Scanner;
 
 public class Person {
@@ -7,6 +7,7 @@ public class Person {
 	private String name;
 	private int power;
 	private int health;
+	private int posX, posY;
 	
 	public Person(int personPower, int personHealth) {
 		this.setPower(personPower);
@@ -34,6 +35,30 @@ public class Person {
     	// System.out.println("Welcome to the game, " + playerName);	
 		this.name = playerName;
 		
+	}
+	
+	
+	public void chooseMove() {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("What's your move? use <W,A,S,D> keys.");
+		while (!sc.hasNext("[WASDwasd]")) {
+		    System.out.println("That's not correct, please try again. Use only <W,A,S,D> keys!");
+		    sc.next();
+		}
+		String input = sc.next();
+
+		System.out.println("Moving: " + input);
+				
+		if (input.equalsIgnoreCase("W")) {
+		
+		} else if (input.equalsIgnoreCase("A")) {
+		
+		} else if (input.equalsIgnoreCase("S")) {
+		
+		} else if (input.equalsIgnoreCase("D")) {
+		
+		}
 	}
 	
 	

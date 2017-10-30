@@ -1,5 +1,5 @@
 package board;
-//
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -48,12 +48,24 @@ public class Board {
     	return index % boardSize;
     }
     
+    private void createBadRoom(int randRoomIndex, int powerLevel, int roomLevel) {
+		BadRoom e = new BadRoom(powerLevel, roomLevel);    			
+		e.setIndex(randRoomIndex);			
+		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
+    }
+    
+    private void createPowerRoom(int randRoomIndex, int powerLevel, int roomLevel) {
+    	PowerRoom e = new PowerRoom(powerLevel, roomLevel);    			
+		e.setIndex(randRoomIndex);			
+		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
+    }
+    
     public void generateRooms() {
     	
     	if (rooms == null)
     		return;
     	
-    	// intially create all emty rooms
+    	// initially create all empty rooms
     	
 		int index=0;
     	for (int x=0; x<rooms.length; x++) {
@@ -61,8 +73,6 @@ public class Board {
     			index++;
     			
     			EmptyRoom e = new EmptyRoom();
-    			e.setX(x);
-    			e.setY(y);
     			e.setIndex(index);
     			
     			rooms[x][y] = e;
@@ -71,23 +81,19 @@ public class Board {
     	
 		// how many chance rooms do we need?
 		
-		int numChanceRooms = 0;
 		int numHighRiskRooms = 0;
 		int numMediumRiskRooms = 0;
 		int numLowRiskRooms = 0;
 		
 		if (boardSize == Board.SMALLBOARD) {
-			numChanceRooms = 10;
 			numHighRiskRooms = 0;
 			numMediumRiskRooms = 5;
 			numLowRiskRooms = 5;
 		} else if (boardSize == Board.MEDIUMBOARD) {
-			numChanceRooms = 20;
 			numHighRiskRooms = 5;
 			numMediumRiskRooms = 10;
 			numLowRiskRooms = 5;
 		} else if (boardSize == Board.LARGEBOARD) {
-			numChanceRooms = 30;
 			numHighRiskRooms = 10;
 			numMediumRiskRooms = 10;
 			numLowRiskRooms = 10;
@@ -100,38 +106,42 @@ public class Board {
 	    	randomRooms[i] = i+1;
 	    }
 	    Collections.shuffle(Arrays.asList(randomRooms));
-
 	    
+	    // Lower risk room
 	    for (int x=0; x<numLowRiskRooms; x++) {
 	    	int randRoomIndex = randomRooms[x];
 	    	// System.out.println("Low chance room: "+randRoomIndex);
 	    	
-	    	boolean isPowerRoom = false;
-	    	if (isPowerRoom) {
-	    		
-	    		PowerRoom e = new PowerRoom();    			
-    			e.setIndex(randRoomIndex);			
-    			rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
-    			
-	    	} else {
-	    		
-	    		
-	    		BadRoom e = new BadRoom();    			
-    			e.setIndex(randRoomIndex);			
-    			rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
-	    		
+	    	if ((Math.random() * 4) < 1) {
+	    		createBadRoom(randRoomIndex, -10, Room.EASY);
+	    	} else {	
+	    		createPowerRoom(randRoomIndex, 10, Room.EASY);    
 	    	}
 	    	
 	    }
 
+	    // Medium risk room
 	    for (int x=0 ; x<numMediumRiskRooms; x++) {
 	    	int randRoomIndex = randomRooms[x+numLowRiskRooms];
 	    	// System.out.println("Medium chance room: "+randRoomIndex);
+	    	
+	    	if ((Math.random() * 2) < 1) {
+	    		createBadRoom(randRoomIndex, -10, Room.MEDIUM);
+	    	} else {	
+	    		createPowerRoom(randRoomIndex, 15, Room.MEDIUM);    
+	    	}
+	    	
 	    }
     	
 	    for (int x=0; x<numHighRiskRooms; x++) {
 	    	int randRoomIndex = randomRooms[x+numLowRiskRooms+numMediumRiskRooms];
 	    	// System.out.println("High chance room: "+randRoomIndex);
+
+	    	if ((Math.random() * 4) >= 1) {
+	    		createBadRoom(randRoomIndex, -10, Room.HARD);
+	    	} else {	
+	    		createPowerRoom(randRoomIndex, 20, Room.HARD);    
+	    	}
 	    }
     	
     	

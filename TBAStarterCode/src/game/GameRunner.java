@@ -1,7 +1,7 @@
 package game;
 
 import java.util.Scanner;
-//
+
 import board.Board;
 import rooms.Room;
 import players.Person;
@@ -66,11 +66,13 @@ public class GameRunner {
         	
             gameBoard.printBoard();
 
+            player1.chooseMove();
+            
             // String move = player1.chooseMove();
             // Utilities.movePlayer(tech, player1,move);
             // gameOn = false;
           
-            gameOn = false;
+            // gameOn = false;
             
         }
 		// in.close();
