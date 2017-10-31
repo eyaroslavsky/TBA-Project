@@ -24,7 +24,15 @@ public class GameRunner {
 	 */
 	private void runGame() {
 		
-		System.out.println("Welcome to my game. What size board do want to play on? S, M, L: ");
+		System.out.println("Welcome to my game! "
+				+ "\nIn this game, you start off with 50 health points and must make it to the opposite corner of the board in order to win or lose."
+				+ "\nTo win, you must obtain at least 100 health points when you reach the end. Otherwise, you will lose."
+				+ "\nRooms labeled with an 'E' represent an easy room with a higher chance of success, although it's not as rewarding."
+				+ "\nRooms labeled with an 'M' represent a medium room with an average chance of success and average rewards."
+				+ "\nRooms labeled with an 'H' represent a hard room with an low chance of success, although they are more rewarding."
+				+ "\nYou will be represented by the character 'X'.");
+		System.out.println("What size board do want to play on? "
+				+ "\nType in 'S', 'M', or 'L' to play on either a small, medium, or large board: ");
     	
     	Scanner sc = new Scanner(System.in);
     	String boardSize = sc.nextLine();
@@ -54,8 +62,15 @@ public class GameRunner {
         
         // Getting person info
         Person player1 = new Person();
+        player1.setPosition(0, 0, boardSizeInt);
+        
+        Room room = gameBoard.getRooms()[0][0];
+        room.setExplored(true);
+        
         player1.askForName(); 
         
+        
+        gameBoard.setPlayer(player1);
         System.out.println("Welcome to the arena, " + player1.getName());
         
         
@@ -67,17 +82,57 @@ public class GameRunner {
             
         	
             gameBoard.printBoard();
+            
+            System.out.println("Your Health is at: " + player1.getHealth() + " points");
 
-            player1.chooseMove();
+            String move = player1.chooseMove();
             
-            // String move = player1.chooseMove();
-            // Utilities.movePlayer(tech, player1,move);
-            // gameOn = false;
-          
-            // gameOn = false;
+    		if (move.equalsIgnoreCase("A")) {
+    			
+    			if (player1.getPosY()  > 0) 
+    				player1.setPosition(player1.getPosX(), player1.getPosY()-1, boardSizeInt);    		
+    			
+    		} else if (move.equalsIgnoreCase("W")) {
+    			
+    			if (player1.getPosX() > 0) 
+    				player1.setPosition(player1.getPosX()-1, player1.getPosY(), boardSizeInt);
+    			
+    		} else if (move.equalsIgnoreCase("D")) {		
+    			
+    			if (player1.getPosY() < boardSizeInt-1) 
+    				player1.setPosition(player1.getPosX(), player1.getPosY()+1, boardSizeInt);    	
+    			
+    		} else if (move.equalsIgnoreCase("S")) {
+    			
+    			if (player1.getPosX() < boardSizeInt-1) 
+    				player1.setPosition(player1.getPosX()+1, player1.getPosY(), boardSizeInt);
+    				
+    		}
+    		
+    		Room nextRoom = gameBoard.getRooms()[player1.getPosX()][player1.getPosY()];
+            nextRoom.setExplored(true);
+             
+            int roomPower = nextRoom.getPowerLevel();
+            player1.setHealth(player1.getHealth()+roomPower);
             
+            if (nextRoom.getRoomLevel() != Room.EMPTY) {
+            	System.out.println("Your entered an: " + Room.ROOMLABEL[nextRoom.getRoomLevel()] + " room. You received: " + roomPower + " points");
+            } 
+            
+            if ((player1.getPosX() == boardSizeInt - 1) && (player1.getPosY() == boardSizeInt - 1)) {
+            	gameOn = false;
+            	gameBoard.printBoard();
+            	if (player1.getHealth() >= 100) {
+            		System.out.println("Congratulations! You have won the game!");
+            	}
+            	else {
+            		System.out.println("Game over. You have not received enough points. You Lose");
+            	}
+            }
         }
-		// in.close();
+        
+        sc.close();
+        System.out.println("Thank you for playing, " + player1.getName());
 	}
 	
 

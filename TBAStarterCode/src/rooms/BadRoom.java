@@ -2,7 +2,6 @@ package rooms;
 
 public class BadRoom extends Room {
 
-	int powerLevel = 0;
 	
 	/**
 	 * Constructor for the power level of the Bad Room
@@ -32,5 +31,6 @@ public class BadRoom extends Room {
 		System.out.print("[" + Room.ROOMLABEL[roomLevel] + "]");
 
 	}
+	
 
 }

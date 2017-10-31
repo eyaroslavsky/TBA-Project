@@ -5,22 +5,20 @@ import java.util.Scanner;
 public class Person {
 	
 	private String name;
-	private int power;
 	private int health;
 	private int posX, posY;
+	private int positionIndex;
 	
 	/**
 	 * Constructor for creating a new player
 	 * @param personPower sets the power for a new player
 	 * @param personHealth sets the health for a new player
 	 */
-	public Person(int personPower, int personHealth) {
-		this.setPower(personPower);
-		this.health = personHealth;
+	public Person(int personHealth) {
+		this.setHealth(personHealth);
 	}
 	public Person() {
-		this.setPower(50);
-		this.health = 100;
+		this.setHealth(50);
 	}
 	
 	
@@ -47,7 +45,7 @@ public class Person {
 	/**
 	 * Let's the user decide what direction they want to move
 	 */
-	public void chooseMove() {
+	public String chooseMove() {
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("What's your move? use <W,A,S,D> keys.");
@@ -57,17 +55,17 @@ public class Person {
 		}
 		String input = sc.next();
 
-		System.out.println("Moving: " + input);
-				
-		if (input.equalsIgnoreCase("W")) {
+		return input;
+	}
+	
+	
+	public void setPosition(int x, int y, int l) {
 		
-		} else if (input.equalsIgnoreCase("A")) {
+		this.setPosX(x);
+		this.setPosY(y);
 		
-		} else if (input.equalsIgnoreCase("S")) {
+		this.positionIndex = x*l + y;
 		
-		} else if (input.equalsIgnoreCase("D")) {
-		
-		}
 	}
 	
 	
@@ -91,16 +89,37 @@ public class Person {
 	 * Takes the private power and returns it so it can be used elsewhere
 	 * @return power so it can be used outside of the class
 	 */
-	public int getPower() {
-		return power;
+	public int getHealth() {
+		return health;
 	}
 	
 	/**
 	 * Constructor for the power
 	 * @param power takes the integer of the power of the player
 	 */
-	public void setPower(int power) {
-		this.power = power;
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	
+	public int getPositionIndex() {
+		return positionIndex;
+	}
+	public void setPositionIndex(int positionIndex) {
+		this.positionIndex = positionIndex;
+	}
+	public int getPosX() {
+		return posX;
+	}
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+	public int getPosY() {
+		return posY;
+	}
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 	
 }

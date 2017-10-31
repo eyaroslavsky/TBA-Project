@@ -2,7 +2,6 @@ package rooms;
 
 public class PowerRoom extends Room {
 
-	int powerLevel = 0;
 	
 	/**
 	 * Constructor for the power level of the Power Room
@@ -28,10 +27,10 @@ public class PowerRoom extends Room {
 	@Override
 	public void print() {
 		
-		// System.out.print("[" + powerLevel + " " + roomLevel + "]");
-		
+		// System.out.print("[" + powerLevel + " " + roomLevel + "]");		
 		System.out.print("[" + Room.ROOMLABEL[roomLevel] + "]");
 
 	}
+
 
 }

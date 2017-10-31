@@ -3,6 +3,7 @@ package board;
 import java.util.Arrays;
 import java.util.Collections;
 
+import players.Person;
 import rooms.*;
 
 public class Board {
@@ -15,6 +16,8 @@ public class Board {
     private Room[][] rooms;
     private int boardSize = 0;
     
+    private Person player;
+    
     /**
      * Board constructor to create new instances of the board while at play
      * @param boardSizeInt the integer of the dimensions of the board
@@ -25,6 +28,7 @@ public class Board {
     	this.rooms = new Room[boardSize][boardSize];
        
     }
+    
 
     /**
      * Prints out the board
@@ -34,12 +38,21 @@ public class Board {
         for(Room[] row : rooms) {
         
             for (Room room : row) {
-            
-                room.print();
+                room.print(isOccupied(room));
             }
             System.out.println();
         }
     }
+    
+    
+	public Person getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Person player) {
+		this.player = player;
+	}
+	
     
     /**
      * Gives out the 2D array of rooms to be used later on
@@ -91,6 +104,23 @@ public class Board {
 		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
     }
     
+    
+    private boolean isOccupied(Room room) {
+    	
+    	if (this.getPlayer() == null)
+    		return false;
+    	
+    	// System.err.println("Room: " + room.getIndex() + " person index: " + this.getPlayer().getPositionIndex());
+    	
+    	if (room.getIndex() == this.getPlayer().getPositionIndex()) {
+    		return true;
+    	}
+    	else { 
+    		return false;
+    	}
+    	
+    }
+    
     /**
      * Generates the rooms randomly
      */
@@ -104,16 +134,15 @@ public class Board {
 		int index=0;
     	for (int x=0; x<rooms.length; x++) {
     		for (int y=0; y<rooms[x].length; y++) {
-    			index++;
     			
     			EmptyRoom e = new EmptyRoom();
     			e.setIndex(index);
     			
     			rooms[x][y] = e;
+    			
+    			index++;
     		}
     	}
-    	
-		// how many chance rooms do we need?
 		
 		int numHighRiskRooms = 0;
 		int numMediumRiskRooms = 0;
@@ -180,6 +209,8 @@ public class Board {
     	
     	
     }
+
+
     
 
 }
