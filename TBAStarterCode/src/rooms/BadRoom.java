@@ -1,9 +1,13 @@
 package rooms;
 
+/**
+ * Text Based Adventure Project
+ * @author Edward Yaroslavsky periods 6-7 
+ * 11/1/17
+ */
+
 public class BadRoom extends Room {
 
-	
-	
 	/**
 	 * Constructor for the power level of the Bad Room
 	 * @param level takes the integer of the level of the room
@@ -27,20 +31,19 @@ public class BadRoom extends Room {
 	 */
 	@Override
 	public void print() {
-		
-		// System.out.print("[" + powerLevel + " " + roomLevel + "]");
 		System.out.print("[" + Room.ROOMLABEL[roomLevel] + "]");
-
 	}
 
+	/**
+	 * Takes a random factor to multiply the power of the rooms by
+	 * @return the power level of the room multiplied by the randomly generated factor
+	 */
 	@Override
 	public int getPowerValue() {
-		
 		// random between -1 and -3
 		int factor = -1 * (1 + (int)(Math.random() * 3));
 		
 		return powerLevel*factor;	
-		
 	}
 	
 

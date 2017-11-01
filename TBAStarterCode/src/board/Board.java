@@ -6,6 +6,12 @@ import java.util.Collections;
 import players.Person;
 import rooms.*;
 
+/**
+ * Text Based Adventure Project
+ * @author Edward Yaroslavsky periods 6-7 
+ * 11/1/17
+ */
+
 public class Board {
 
 
@@ -104,7 +110,11 @@ public class Board {
 		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
     }
     
-    
+    /**
+     * Checks to see if the player is occupying a room
+     * @param room the room that is going to be checked whether it's occupied or not
+     * @return true or false depending on if the room is occupied
+     */
     private boolean isOccupied(Room room) {
     	
     	if (this.getPlayer() == null)

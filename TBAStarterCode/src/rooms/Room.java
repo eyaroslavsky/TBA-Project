@@ -1,5 +1,10 @@
 package rooms;
 
+/**
+ * Text Based Adventure Project
+ * @author Edward Yaroslavsky periods 6-7 
+ * 11/1/17
+ */
 
 public abstract class Room implements IPowerLevel {
 
@@ -18,9 +23,15 @@ public abstract class Room implements IPowerLevel {
     int roomLevel = Room.EMPTY;
 	int powerLevel = 0;
     
-
+	/**
+	 * The abstract print method to be used by sub classes
+	 */
     public abstract void print();
     
+    /**
+     * Prints if the specific room is explored or occupied
+     * @param occupied takes the boolean of whether the room the user traveled to is occupied
+     */
 	public void print(boolean occupied) {
 		if (occupied)
 			System.out.print("[X]");
