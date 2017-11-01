@@ -11,6 +11,12 @@ public class EmptyRoom extends Room {
 		System.out.print("[ ]");
 
 	}
+
+	@Override
+	public int getPowerValue() {
+		// no adjustments for empty room
+		return powerLevel;	
+	}
 	
 
 }

@@ -26,7 +26,7 @@ public class GameRunner {
 		
 		System.out.println("Welcome to my game! "
 				+ "\nIn this game, you start off with 50 health points and must make it to the opposite corner of the board in order to win or lose."
-				+ "\nTo win, you must obtain at least 100 health points when you reach the end. Otherwise, you will lose."
+				+ "\nTo win, you must obtain at least 100 health points when you reach the end. Otherwise, you will lose. If you reach below 0 points, you will also lose."
 				+ "\nRooms labeled with an 'E' represent an easy room with a higher chance of success, although it's not as rewarding."
 				+ "\nRooms labeled with an 'M' represent a medium room with an average chance of success and average rewards."
 				+ "\nRooms labeled with an 'H' represent a hard room with an low chance of success, although they are more rewarding."
@@ -112,12 +112,18 @@ public class GameRunner {
     		Room nextRoom = gameBoard.getRooms()[player1.getPosX()][player1.getPosY()];
             nextRoom.setExplored(true);
              
-            int roomPower = nextRoom.getPowerLevel();
+            int roomPower = nextRoom.getPowerValue();
             player1.setHealth(player1.getHealth()+roomPower);
             
             if (nextRoom.getRoomLevel() != Room.EMPTY) {
             	System.out.println("Your entered an: " + Room.ROOMLABEL[nextRoom.getRoomLevel()] + " room. You received: " + roomPower + " points");
             } 
+            
+            if (player1.getHealth() < 0) {
+            	gameOn = false;
+            	gameBoard.printBoard();
+            	System.out.println("Game over. You do not have any more points to spend. You Lose");
+            }
             
             if ((player1.getPosX() == boardSizeInt - 1) && (player1.getPosY() == boardSizeInt - 1)) {
             	gameOn = false;

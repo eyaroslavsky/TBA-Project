@@ -1,7 +1,7 @@
 package rooms;
 
 
-public abstract class Room {
+public abstract class Room implements IPowerLevel {
 
 	
 	public static final int EMPTY = 0;
@@ -10,6 +10,8 @@ public abstract class Room {
 	public static final int HARD = 3;
 	
 	public static final String[] ROOMLABEL = {" ", "E", "M", "H"};
+	
+	public static final int DEFAULT_ROOM_LEVEL = 10;
 	
     private boolean explored = false;
     private int index;

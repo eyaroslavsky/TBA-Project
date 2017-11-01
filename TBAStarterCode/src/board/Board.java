@@ -86,8 +86,8 @@ public class Board {
      * @param powerLevel the integer of the power the room holds
      * @param roomLevel the integer of the risk the room holds
      */
-    private void createBadRoom(int randRoomIndex, int powerLevel, int roomLevel) {
-		BadRoom e = new BadRoom(powerLevel, roomLevel);    			
+    private void createBadRoom(int randRoomIndex, int roomLevel) {
+		BadRoom e = new BadRoom(Room.DEFAULT_ROOM_LEVEL, roomLevel);    			
 		e.setIndex(randRoomIndex);			
 		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
     }
@@ -98,8 +98,8 @@ public class Board {
      * @param powerLevel the integer of the power the room holds
      * @param roomLevel the integer of the risk the room holds
      */
-    private void createPowerRoom(int randRoomIndex, int powerLevel, int roomLevel) {
-    	PowerRoom e = new PowerRoom(powerLevel, roomLevel);    			
+    private void createPowerRoom(int randRoomIndex, int roomLevel) {
+    	PowerRoom e = new PowerRoom(Room.DEFAULT_ROOM_LEVEL, roomLevel);    			
 		e.setIndex(randRoomIndex);			
 		rooms[getXfromRoomIndex(randRoomIndex)][getYfromRoomIndex(randRoomIndex)] = e;
     }
@@ -176,9 +176,9 @@ public class Board {
 	    	// System.out.println("Low chance room: "+randRoomIndex);
 	    	
 	    	if ((Math.random() * 4) < 1) {
-	    		createBadRoom(randRoomIndex, -10, Room.EASY);
+	    		createBadRoom(randRoomIndex, Room.EASY);
 	    	} else {	
-	    		createPowerRoom(randRoomIndex, 10, Room.EASY);    
+	    		createPowerRoom(randRoomIndex, Room.EASY);    
 	    	}
 	    	
 	    }
@@ -189,9 +189,9 @@ public class Board {
 	    	// System.out.println("Medium chance room: "+randRoomIndex);
 	    	
 	    	if ((Math.random() * 2) < 1) {
-	    		createBadRoom(randRoomIndex, -10, Room.MEDIUM);
+	    		createBadRoom(randRoomIndex, Room.MEDIUM);
 	    	} else {	
-	    		createPowerRoom(randRoomIndex, 15, Room.MEDIUM);    
+	    		createPowerRoom(randRoomIndex, Room.MEDIUM);    
 	    	}
 	    	
 	    }
@@ -201,9 +201,9 @@ public class Board {
 	    	// System.out.println("High chance room: "+randRoomIndex);
 
 	    	if ((Math.random() * 4) >= 1) {
-	    		createBadRoom(randRoomIndex, -10, Room.HARD);
+	    		createBadRoom(randRoomIndex, Room.HARD);
 	    	} else {	
-	    		createPowerRoom(randRoomIndex, 20, Room.HARD);    
+	    		createPowerRoom(randRoomIndex, Room.HARD);    
 	    	}
 	    }
     	

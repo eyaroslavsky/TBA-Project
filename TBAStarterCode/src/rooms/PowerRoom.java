@@ -7,8 +7,8 @@ public class PowerRoom extends Room {
 	 * Constructor for the power level of the Power Room
 	 * @param level takes the integer of the level of the room
 	 */
-	public PowerRoom(int level) {
-		this.powerLevel = level;
+	public PowerRoom(int roomLevel) {
+		this.roomLevel = roomLevel;
 	}
 	
 	/**
@@ -30,6 +30,16 @@ public class PowerRoom extends Room {
 		// System.out.print("[" + powerLevel + " " + roomLevel + "]");		
 		System.out.print("[" + Room.ROOMLABEL[roomLevel] + "]");
 
+	}
+
+	@Override
+	public int getPowerValue() {
+		
+
+		// random between 1 and 2
+		int factor = 1 + (int)(Math.random() * 3);
+		
+		return powerLevel * factor;
 	}
 
 

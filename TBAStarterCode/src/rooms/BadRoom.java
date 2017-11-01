@@ -3,12 +3,13 @@ package rooms;
 public class BadRoom extends Room {
 
 	
+	
 	/**
 	 * Constructor for the power level of the Bad Room
 	 * @param level takes the integer of the level of the room
 	 */
-	public BadRoom(int level) {
-		this.powerLevel = level;
+	public BadRoom(int roomLevel) {
+		this.roomLevel = roomLevel;
 	}
 	
 	/**
@@ -30,6 +31,16 @@ public class BadRoom extends Room {
 		// System.out.print("[" + powerLevel + " " + roomLevel + "]");
 		System.out.print("[" + Room.ROOMLABEL[roomLevel] + "]");
 
+	}
+
+	@Override
+	public int getPowerValue() {
+		
+		// random between -1 and -3
+		int factor = -1 * (1 + (int)(Math.random() * 3));
+		
+		return powerLevel*factor;	
+		
 	}
 	
 
